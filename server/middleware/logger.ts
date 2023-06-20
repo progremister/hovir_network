@@ -28,4 +28,4 @@ const logger = (req: Request, resp: Response, next: NextFunction) => {
   next();
 };
 
-export { logEvents, logger };
+export { logger, logEvents};
