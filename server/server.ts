@@ -6,13 +6,14 @@ import helmet from "helmet";
 import morgan from "morgan";
 import path from "path";
 import cookieParser from "cookie-parser";
-import mongoose, { Callback } from "mongoose";
+import mongoose from "mongoose";
 
 import { logger, logEvents } from "./middleware/logger";
 import errorHandler from "./middleware/errorHandler";
 import connectDB from "./config/dbConnection";
 import corsOptions from "./config/corsOptions";
 import authRoutes from "./routes/auth";
+import 'express-async-errors';
 
 /* CONFIGURATIONS */
 dotenv.config();
