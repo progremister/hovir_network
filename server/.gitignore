@@ -1,5 +1,11 @@
+# Modules
 node_modules
+
+# Directories
 logs
+public
+data
+
+# Environment
 .env
 env.d.ts
-public

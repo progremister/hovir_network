@@ -1,4 +1,4 @@
-import User, { IUserSchema } from "../models/user";
+import User, { IUserSchema } from "../models/User";
 import express, { Request, Response } from "express";
 
 /**

@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import jwt, { Secret } from "jsonwebtoken";
-import User, { IUserSchema } from "../models/user";
+import User, { IUserSchema } from "../models/User";
 
 /**
  * @desc Registration

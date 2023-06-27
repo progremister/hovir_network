@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import upload from "../config/fileStorage";
 import verifyJWTMiddleware from "../middleware/auth";
-import { createPost } from "../controllers/postsController";
+import { createPost, getFeedPosts, getUserPosts, likePost } from "../controllers/postsController";
 
 const router = express.Router();
 
