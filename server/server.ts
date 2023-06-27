@@ -13,6 +13,7 @@ import errorHandler from "./middleware/errorHandler";
 import connectDB from "./config/dbConnection";
 import corsOptions from "./config/corsOptions";
 import authRoutes from "./routes/auth";
+import usersRoutes from "./routes/users"
 import 'express-async-errors';
 
 /* CONFIGURATIONS */
@@ -35,6 +36,7 @@ app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
 /* ROUTES */
 app.use("/auth", authRoutes);
+app.use("/users", usersRoutes);
 
 app.all("*", (req: Request, resp: Response) => {
   resp.status(404);

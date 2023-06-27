@@ -1,11 +1,12 @@
 import mongoose from "mongoose";
 
 export interface IUserSchema {
-  id: string,
-  username: string,
+  _id: string;
+  id?: string;
+  username: string;
   email: string;
   password: string;
-  picturePath: string;
+  picturePath?: string;
   friends: any;
   location: string;
   occupation: string;
