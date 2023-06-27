@@ -3,17 +3,12 @@ import bcrypt from "bcrypt";
 import jwt, { Secret } from "jsonwebtoken";
 import User, { IUserSchema } from "../models/user";
 
-interface Decoded {
-  username: string;
-  email: string;
-}
-
 /**
  * @desc Registration
  * @route POST /auth/register
  * @access Public
  */
-const register = async (req: Request, resp: Response) => {
+export const register = async (req: Request, resp: Response) => {
   const {
     id,
     username,
@@ -65,7 +60,7 @@ const register = async (req: Request, resp: Response) => {
  * @route POST /auth/login
  * @access Public
  */
-const login = async (req: Request, resp: Response) => {
+export const login = async (req: Request, resp: Response) => {
   const { email, username, password }: IUserSchema = req.body;
   if (!password || (!email && !username)) {
     return resp.status(400).json({ message: "Not enough fields provided!" });
@@ -114,7 +109,7 @@ const login = async (req: Request, resp: Response) => {
  * @route POST /auth/logout
  * @access Public
  */
-const logout = (req: Request, resp: Response) => {
+export const logout = (req: Request, resp: Response) => {
   const cookies = req.cookies;
   if (!cookies?.jwt) {
     return resp.sendStatus(204);
@@ -127,10 +122,4 @@ const logout = (req: Request, resp: Response) => {
   });
 
   resp.json({ message: "Cookies cleared." });
-};
-
-export default {
-  register,
-  login,
-  logout,
 };

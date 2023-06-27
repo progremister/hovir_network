@@ -2,11 +2,9 @@ import express from "express";
 const router = express.Router();
 
 import upload from "../config/fileStorage";
+import { register, login } from "../controllers/authController";
 
-import authController from "../controllers/authController";
-
-router.post("/register", upload.single("picture"), authController.register);
-router.post("/login", authController.login);
-
+router.post("/register", upload.single("picture"), register);
+router.post("/login", login);
 
 export default router;
