@@ -1,3 +1,5 @@
+import { PaletteMode } from "@mui/material";
+
 export interface IUser {
   _id: string;
   username: string;
@@ -21,4 +23,11 @@ export interface IPost {
   userPicturePath: string;
   likes: Map<string, boolean>;
   comments: any;
+}
+
+export interface IState {
+  mode: PaletteMode,
+  user: IUser | null,
+  token: null,
+  posts: IPost[],
 }

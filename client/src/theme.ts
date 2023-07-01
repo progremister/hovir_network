@@ -1,3 +1,5 @@
+import { PaletteMode } from "@mui/material";
+
 // color design tokens export
 export const colorTokens = {
     grey: {
@@ -30,7 +32,8 @@ export const colorTokens = {
   };
   
   // mui theme settings
-  export const themeSettings = (mode: string) => {
+  export const themeSettings = (mode: PaletteMode) => {
+    
     return {
       palette: {
         mode: mode,

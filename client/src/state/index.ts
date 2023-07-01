@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { IUser, IPost } from "constants";
+import { IUser, IPost, IState } from "constants";
 
-const initialState = {
+const initialState: IState = {
   mode: "light",
   user: null as IUser | null,
   token: null,
