@@ -1,5 +1,5 @@
 import User, { IUserSchema } from "../models/User";
-import express, { Request, Response } from "express";
+import { Request, Response } from "express";
 
 /**
  * @desc Get User
@@ -32,8 +32,8 @@ export const getUserFriends = async (req: Request, resp: Response) => {
   );
 
   const formattedFriends = friends.map(
-    ({ _id, username, occupation, location, picturePath, friends }) => {
-      return { _id, username, occupation, location, picturePath, friends };
+    ({ _id, firstName, lastName, username, occupation, location, picturePath, friends }) => {
+      return { _id, firstName, lastName, username, occupation, location, picturePath, friends };
     }
   );
   resp.status(200).json(formattedFriends);
@@ -68,8 +68,8 @@ export const manageFriend = async (req: Request, resp: Response) => {
   );
 
   const formattedFriends = friends.map(
-    ({ _id, username, occupation, location, picturePath, friends }) => {
-      return { _id, username, occupation, location, picturePath, friends };
+    ({ _id, firstName, lastName, username, occupation, location, picturePath, friends }) => {
+      return { _id, firstName, lastName, username, occupation, location, picturePath, friends };
     }
   );
 

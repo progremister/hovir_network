@@ -3,6 +3,8 @@ import mongoose from "mongoose";
 export interface IUserSchema {
   _id: string;
   id?: string;
+  firstName: string,
+  lastName: string,
   username: string;
   email: string;
   password: string;
@@ -16,11 +18,23 @@ export interface IUserSchema {
 
 const UserSchema = new mongoose.Schema<IUserSchema>(
   {
-    username: {
+    firstName: {
       type: String,
       require: true,
       min: 2,
       max: 50,
+    },
+    lastName: {
+      type: String,
+      require: true,
+      min: 2,
+      max: 50,
+    },
+    username: {
+      type: String,
+      require: true,
+      min: 3,
+      max: 15,
     },
     email: {
       type: String,

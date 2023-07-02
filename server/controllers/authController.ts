@@ -11,6 +11,8 @@ import User, { IUserSchema } from "../models/User";
 export const register = async (req: Request, resp: Response) => {
   const {
     id,
+    firstName,
+    lastName,
     username,
     email,
     password,
@@ -19,7 +21,7 @@ export const register = async (req: Request, resp: Response) => {
     location,
     occupation,
   }: IUserSchema = req.body;
-  if (!id || !username || !password || !email) {
+  if (!id || !username || !firstName || !lastName || !password || !email) {
     return resp.status(400).json({ message: "All fields are required!" });
   }
 
@@ -36,6 +38,8 @@ export const register = async (req: Request, resp: Response) => {
   const hashedPassword = await bcrypt.hash(password, salt);
 
   const newUser = new User({
+    firstName,
+    lastName,
     username,
     email,
     password: hashedPassword,
