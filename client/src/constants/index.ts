@@ -2,6 +2,8 @@ import { PaletteMode } from "@mui/material";
 
 export interface IUser {
   _id: string;
+  firstName: string;
+  lastName: string;
   username: string;
   email: string;
   password: string;
@@ -26,27 +28,27 @@ export interface IPost {
 }
 
 export interface IState {
-  mode: PaletteMode,
-  user: IUser | null,
-  token: null,
-  posts: IPost[],
+  mode: PaletteMode;
+  user: IUser | null;
+  token: null;
+  posts: IPost[];
 }
 
 export interface Palette {
   primary: {
-    dark: string,
-    main: string,
-    light: string,
-  },
+    dark: string;
+    main: string;
+    light: string;
+  };
   neutral: {
-    dark: string,
-    main: string,
-    mediumMain: string,
-    medium: string,
-    light: string,
-  },
+    dark: string;
+    main: string;
+    mediumMain: string;
+    medium: string;
+    light: string;
+  };
   background: {
-    default: string,
-    alt: string,
-  }
+    default: string;
+    alt: string;
+  };
 }
