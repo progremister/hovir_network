@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { logoLight, logoDark } from "../assets";
 import {
   Box,
   IconButton,
@@ -45,20 +46,12 @@ const Navbar = () => {
   return (
     <FlexBetween style={{ padding: "1rem 1.5rem", backgroundColor: alt }}>
       <FlexBetween gap="1.75rem">
-        <Typography
-          fontWeight="bold"
-          fontSize="clamp(1rem, 2rem, 2.25rem)"
-          color="primary"
-          onClick={() => navigate("/home")}
-          sx={{
-            "&:hover": {
-              filter: "brightness(70%)",
-              cursor: "pointer",
-            },
-          }}
-        >
-          Hóvir
-        </Typography>
+      <img 
+        src={ theme.palette.mode === "light" ? logoLight : logoDark } 
+        alt="logo" 
+        width="35%" 
+        style={{ marginTop: "3.5rem" }} />
+        
         {isNonMobileScreens && (
           <FlexBetween
             style={{ backgroundColor: neutralLight }}

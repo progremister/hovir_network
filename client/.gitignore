@@ -25,3 +25,6 @@ dist-ssr
 
 # Public
 public/assets
+
+# Environment
+src/environment.d.ts
