@@ -10,7 +10,6 @@ import User, { IUserSchema } from "../models/User";
  */
 export const register = async (req: Request, resp: Response) => {
   const {
-    id,
     firstName,
     lastName,
     username,
@@ -21,7 +20,7 @@ export const register = async (req: Request, resp: Response) => {
     location,
     occupation,
   }: IUserSchema = req.body;
-  if (!id || !username || !firstName || !lastName || !password || !email) {
+  if (!username || !firstName || !lastName || !password || !email) {
     return resp.status(400).json({ message: "All fields are required!" });
   }
 
