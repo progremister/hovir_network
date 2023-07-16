@@ -71,11 +71,13 @@ const Form = () => {
     }
     formData.append("picturePath", values.picture.name);
 
-    const savedUserResponse = await fetch("http://localhost:3030/auth/register", {
-      method: "POST",
-      body: formData,
-    });
-
+    const savedUserResponse = await fetch(
+      "http://localhost:3030/auth/register",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
     const savedUser = await savedUserResponse.json();
     onSubmitProps.resetForm();
 
@@ -90,24 +92,22 @@ const Form = () => {
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(values),
     });
-
     const loggedIn = await loggedInUserResponse.json();
     onSubmitProps.resetForm();
-
     if (loggedIn) {
       dispatch(
         setLogin({
-            user: loggedIn.user,
-            token: loggedIn.token
+          user: loggedIn.user,
+          token: loggedIn.token
         })
       );
       navigate("/home");
     }
   };
 
-  const handleFormSubmit = async (values, onSubmitPage) => {
-    if (isLogin) await login(values, onSubmitPage);
-    if (isRegister) await register(values, onSubmitPage);
+  const handleFormSubmit = async (values, onSubmitProps) => {
+    if (isLogin) await login(values, onSubmitProps);
+    if (isRegister) await register(values, onSubmitProps);
   };
 
   return (
