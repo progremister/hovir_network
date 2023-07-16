@@ -217,8 +217,8 @@ const Form = () => {
                         {!values.picture ? (
                           <p>Add Picture Here</p>
                         ) : (
-                          <FlexBetween>
-                            <Typography>{values.picture.name}</Typography>
+                          <FlexBetween overflow="hidden">
+                            <Typography maxWidth="100%">{values.picture.name}</Typography>
                             <EditOutlinedIcon />
                           </FlexBetween>
                         )}
