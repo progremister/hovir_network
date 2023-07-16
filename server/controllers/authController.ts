@@ -63,48 +63,31 @@ export const register = async (req: Request, resp: Response) => {
  * @route POST /auth/login
  * @access Public
  */
+/* LOGGING IN */
 export const login = async (req: Request, resp: Response) => {
-  const { email, username, password }: IUserSchema = req.body;
-  if (!password || (!email && !username)) {
-    return resp.status(400).json({ message: "Not enough fields provided!" });
-  }
-  const user = username
-    ? await User.findOne({ username }).exec()
-    : await User.findOne({ email }).exec();
-
-  if (!user) {
-    return resp.status(400).json({ message: "User does not exists!" });
+  const { email, password } = req.body;
+  if (!password || !email) {
+    return resp.status(400).json({ message: "All fields are required!" });
   }
 
-  const isMatch = bcrypt.compare(password, user.password);
-  if (!isMatch) {
-    return resp.status(400).json({ message: "Invalid credentials!" });
-  }
+  const user = await User.findOne({ email: email })
+    .collation({ locale: "en", strength: 2 })
+    .lean()
+    .exec();
+  if (!user) return resp.status(400).json({ message: "User does not exist. " });
 
-  const accessToken = jwt.sign(
+  const isMatch = await bcrypt.compare(password, user.password);
+  if (!isMatch) return resp.status(409).json({ messge: "Invalid credentials. " });
+
+  const token = jwt.sign(
     { id: user._id },
     process.env.ACCESS_TOKEN_SECRET as Secret,
     {
       expiresIn: "10m",
-      algorithm: "RS256",
+      //algorithm: "RS256",
     }
   );
-  const refreshToken = jwt.sign(
-    { id: user._id },
-    process.env.REFRESH_TOKEN_SECRET as Secret,
-    {
-      expiresIn: "1d",
-      algorithm: "RS256",
-    }
-  );
-
-  resp.cookie("jwt", refreshToken, {
-    httpOnly: true,
-    secure: true,
-    sameSite: "none",
-    maxAge: 1 * 24 * 60 * 60 * 1000, //1 day
-  });
-  resp.status(200).json({ accessToken });
+  resp.status(200).json({ token, user });
 };
 
 /**
