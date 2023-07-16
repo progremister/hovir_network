@@ -33,7 +33,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state: IState) => state.user);
-  const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
+  const isNonMobileScreens = useMediaQuery("(min-width: 815px)");
 
   const theme = useTheme();
   const neutralLight = theme.palette.neutral.light;
@@ -49,8 +49,7 @@ const Navbar = () => {
       <img 
         src={ theme.palette.mode === "light" ? logoLight : logoDark } 
         alt="logo" 
-        width="35%" 
-        style={{ marginTop: "3.5rem" }} />
+        width="150px" />
         
         {isNonMobileScreens && (
           <FlexBetween
