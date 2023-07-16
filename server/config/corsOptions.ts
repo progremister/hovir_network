@@ -3,9 +3,9 @@ import allowedOrigins from "./allowedOrigins";
 import { CorsOptions } from "cors";
 
 type OriginFunction = (
-  origin: string | undefined,
-  callback: (err: Error | null, allow?: boolean) => void
-) => void;
+    origin: string | undefined,
+    callback: (err: Error | null, allow?: boolean) => void
+  ) => void;
 
 const corsOptions: CorsOptions = {
   origin: ((origin: string, callback: Callback) => {
