@@ -5,7 +5,7 @@ import Form from './Form'
 
 const LoginPage = () => {
   const theme = useTheme();
-  const isNonMobileScreens = useMediaQuery("(max-width: 1000px)");
+  const isNonMobileScreens = useMediaQuery("(max-width: 815px)");
 
   const alt = theme.palette.background.alt;
 
