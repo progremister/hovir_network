@@ -21,7 +21,7 @@ const verifyToken = async (
 
   const verified = jwt.verify(
     token,
-    process.env.REFRESH_TOKEN_SECRET as Secret
+    process.env.ACCESS_TOKEN_SECRET as Secret
   );
   req.user = verified;
   next();
