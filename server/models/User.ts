@@ -12,7 +12,7 @@ export interface IUserSchema {
   friends: any;
   location: string;
   occupation: string;
-  followers: number;
+  followers: any;
   impressions: number;
 }
 
@@ -58,7 +58,10 @@ const UserSchema = new mongoose.Schema<IUserSchema>(
     },
     location: String,
     occupation: String,
-    followers: Number,
+    followers: {
+      type: Array,
+      default: [],
+    },
     impressions: Number,
   },
   { timestamps: true }
