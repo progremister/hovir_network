@@ -26,7 +26,7 @@ import { setMode, setLogout } from "../state";
 import { useNavigate } from "react-router-dom";
 
 import FlexBetween from "./FlexBetween";
-import { IState } from "constants";
+import { IState } from "../constants";
 
 const Navbar = () => {
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
@@ -38,7 +38,6 @@ const Navbar = () => {
   const theme = useTheme();
   const neutralLight = theme.palette.neutral.light;
   const dark = theme.palette.neutral.dark;
-  const primaryLight = theme.palette.primary.light;
   const alt = theme.palette.background.alt;
 
   const username = user?.username;
