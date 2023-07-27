@@ -9,11 +9,10 @@ export interface IUserSchema {
   email: string;
   password: string;
   picturePath?: string;
-  friends: any;
   location: string;
   occupation: string;
+  friends: any;
   followers: any;
-  impressions: number;
 }
 
 const UserSchema = new mongoose.Schema<IUserSchema>(
@@ -61,8 +60,7 @@ const UserSchema = new mongoose.Schema<IUserSchema>(
     followers: {
       type: Array,
       default: [],
-    },
-    impressions: Number,
+    }
   },
   { timestamps: true }
 );

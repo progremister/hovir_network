@@ -19,6 +19,7 @@ export const register = async (req: Request, resp: Response) => {
     friends,
     location,
     occupation,
+    followers
   }: IUserSchema = req.body;
   if (!username || !firstName || !lastName || !password || !email) {
     return resp.status(400).json({ message: "All fields are required!" });
@@ -46,8 +47,7 @@ export const register = async (req: Request, resp: Response) => {
     friends,
     location,
     occupation,
-    followers: Math.floor(Math.random() * 1000),
-    impressions: Math.floor(Math.random() * 1000),
+    followers
   });
 
   const savedUser = await newUser.save();
