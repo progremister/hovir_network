@@ -45,11 +45,9 @@ const UserWidget = ({ userId, picturePath }: UserWidgetProps) => {
   const {
     firstName,
     lastName,
-    friends,
     location,
     occupation,
-    followers,
-    impressions,
+    followers
   } = user;
 
   return (
@@ -60,7 +58,7 @@ const UserWidget = ({ userId, picturePath }: UserWidgetProps) => {
         onClick={() => navigate(`/profile/${userId}`)}
       >
         <FlexBetween gap="1rem">
-          <UserImage image={picturePath} size="35px" />
+          <UserImage image={picturePath} size="50px" />
           <Box>
             <Typography
               variant="h4"
@@ -68,7 +66,7 @@ const UserWidget = ({ userId, picturePath }: UserWidgetProps) => {
               fontWeight="500"
               sx={{
                 "&:hover": {
-                  color: theme.palette.primary.light,
+                  color: theme.palette.primary.dark,
                   cursor: "pointer",
                 },
               }}
@@ -76,10 +74,11 @@ const UserWidget = ({ userId, picturePath }: UserWidgetProps) => {
               {firstName} {lastName}
             </Typography>
             <Typography color={medium}>{followers.length} followers</Typography>
-            <Typography color={medium}>{friends.length} friends</Typography>
           </Box>
         </FlexBetween>
-        <ManageAccountsOutlined />
+        <ManageAccountsOutlined
+          sx={{ cursor: "pointer" }}
+        />
       </FlexBetween>
 
       <Divider />
@@ -98,22 +97,15 @@ const UserWidget = ({ userId, picturePath }: UserWidgetProps) => {
       <Divider />
 
       <Box p="1rem 0">
-        <FlexBetween>
-          <Typography color={medium}>Impressions of your post</Typography>
-          <Typography color={main} fontWeight="500">
-            {impressions}
-          </Typography>
-        </FlexBetween>
-      </Box>
-
-      <Divider />
-
-      <Box p="1rem 0">
         <Typography fontSize="1rem" color={main} fontWeight="500" mb="1rem">
           Social Profiles
         </Typography>
         <FlexBetween gap="1rem" mb="0.5rem">
-          <FlexBetween gap="1rem">
+          <FlexBetween
+            gap="1rem"
+            sx={{ cursor: "pointer" }}
+            onClick={() => navigate("")}
+          >
             <img src="../assets/linkedin.png" alt="linkedin" />
             <Box>
               <Typography color={main} fontWeight="500">
@@ -122,10 +114,18 @@ const UserWidget = ({ userId, picturePath }: UserWidgetProps) => {
               <Typography color={medium}>Network Platform</Typography>
             </Box>
           </FlexBetween>
-          <EditOutlined sx={{ color: main }} />
+          <EditOutlined sx={{ color: main, cursor: "pointer" }} />
         </FlexBetween>
         <FlexBetween gap="1rem">
-          <FlexBetween gap="1rem">
+          <FlexBetween
+            gap="1rem"
+            sx={{
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+            onClick={() => navigate("")}
+          >
             <img src="../assets/twitter.png" alt="twitter" />
             <Box>
               <Typography color={main} fontWeight="500">
@@ -134,7 +134,7 @@ const UserWidget = ({ userId, picturePath }: UserWidgetProps) => {
               <Typography color={medium}>Social Network</Typography>
             </Box>
           </FlexBetween>
-          <EditOutlined sx={{ color: main }} />
+          <EditOutlined sx={{ color: main, cursor: "pointer" }} />
         </FlexBetween>
       </Box>
     </WidgetWrapper>
