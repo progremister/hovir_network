@@ -5,7 +5,7 @@
   "main": "server.ts",
   "scripts": {
     "start": "node server",
-    "dev": "nodemon --esm server"
+    "dev": "nodemon server"
   },
   "author": "Dmytro Kolosovskyi",
   "license": "ISC",
@@ -18,6 +18,7 @@
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "express-async-errors": "^3.1.1",
+    "express-rate-limit": "^6.8.1",
     "gridfs-stream": "^1.1.1",
     "helmet": "^7.0.0",
     "jsonwebtoken": "^9.0.0",

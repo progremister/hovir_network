@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
-import jwt, { Secret } from "jsonwebtoken";
+import jwt, { JwtPayload, Secret, VerifyCallback, VerifyErrors } from "jsonwebtoken";
 import User, { IUserSchema } from "../models/User";
 
 /**
@@ -103,6 +103,48 @@ export const login = async (req: Request, resp: Response) => {
 
   resp.status(200).json({ accessToken, user });
 };
+
+/**
+ * @desc Refresh
+ * @route POST /auth/refresh
+ * @access Public
+ */
+export const refresh = (req: Request, resp: Response) => {
+  const cookies = req.cookies;
+  if(!cookies?.jwt) {
+    return resp.status(401).json({ message: 'Unauthorized.'});
+  }
+
+  const refreshToken = cookies.jwt;
+
+  jwt.verify(
+    refreshToken,
+    process.env.REFRESH_TOKEN_SECRET as Secret,
+    async (err: VerifyErrors | null, decoded: any) => {
+      if (err) {
+        return resp.status(403).json({ message: "Forbidden!" });
+      }
+
+      const user = await User.findOne({ username: decoded.username });
+
+      if (!user) {
+        return resp.status(401).json({ message: "Unauthorized!" });
+      }
+
+      const accessToken = jwt.sign(
+        {
+          id: user._id
+        },
+        process.env.ACCESS_TOKEN_SECRET as Secret,
+        { 
+          expiresIn: "15m"
+         }
+      );
+
+      resp.json({ accessToken });
+    }
+  );
+}
 
 /**
  * @desc Logout
