@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import jwt, { Secret } from "jsonwebtoken";
 import User, { IUserSchema } from "../models/User";
@@ -70,24 +70,38 @@ export const login = async (req: Request, resp: Response) => {
     return resp.status(400).json({ message: "All fields are required!" });
   }
 
-  const user = await User.findOne({ email: email })
-    .collation({ locale: "en", strength: 2 })
-    .lean()
-    .exec();
+  const user = await User.findOne({ email: email }).exec();
   if (!user) return resp.status(400).json({ message: "User does not exist. " });
 
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) return resp.status(409).json({ messge: "Invalid credentials. " });
 
-  const token = jwt.sign(
+  const accessToken = jwt.sign(
     { id: user._id },
     process.env.ACCESS_TOKEN_SECRET as Secret,
     {
       expiresIn: "10m",
-      //algorithm: "RS256",
+      algorithm: "HS256"
     }
   );
-  resp.status(200).json({ token, user });
+
+  const refreshToken = jwt.sign(
+    { id: user._id },
+    process.env.REFRESH_TOKEN_SECRET as Secret,
+    {
+      expiresIn: "1d",
+      algorithm: "HS256"
+    },
+  );
+
+  resp.cookie("jwt", refreshToken, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    maxAge: 1 * 24 * 60 * 60 * 1000
+  })
+
+  resp.status(200).json({ accessToken, user });
 };
 
 /**
