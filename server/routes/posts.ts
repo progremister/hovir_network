@@ -5,10 +5,12 @@ import { createPost, getFeedPosts, getUserPosts, likePost } from "../controllers
 
 const router = express.Router();
 
-router.post("/", verifyJWTMiddleware, upload.single("picture"), createPost)
+router.use(verifyJWTMiddleware);
 
-router.get("/", verifyJWTMiddleware, getFeedPosts);
-router.get("/:userId/posts", verifyJWTMiddleware, getUserPosts);
-router.patch("/:id/like", verifyJWTMiddleware, likePost);
+router.post("/", upload.single("picture"), createPost)
+
+router.get("/", getFeedPosts);
+router.get("/:userId/posts", getUserPosts);
+router.patch("/:id/like", likePost);
 
 export default router;
