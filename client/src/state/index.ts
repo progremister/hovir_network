@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { IUser, IPost, IState } from "./constants";
+import { IUser, IPost, IState } from "../constants";
 
 const initialState: IState = {
   mode: "light",
@@ -17,8 +17,9 @@ export const authSlice = createSlice({
       state.mode = state.mode === "light" ? "dark" : "light";
     },
     setLogin: (state, action) => {
-      state.user = action.payload.user;
-      state.token = action.payload.token;
+      const { user, accessToken } = action.payload;
+      state.user = user;
+      state.token = accessToken;
     },
     setLogout: (state) => {
       state.user = null;
@@ -26,13 +27,15 @@ export const authSlice = createSlice({
     },
     setFriends: (state, action) => {
       if (state.user) {
-        state.user.friends = action.payload.friends;
+        const { friends } = action.payload;
+        state.user.friends = friends;
       } else {
         console.error("User frinds list is empty :(");
       }
     },
     setPosts: (state, action) => {
-      state.posts = action.payload.posts;
+      const { posts } = action.payload;
+      state.posts = posts;
     },
     setPost: (state, action) => {
       const updatedPosts = state.posts.map((post) => {
@@ -47,3 +50,4 @@ export const authSlice = createSlice({
 export const { setMode, setLogin, setLogout, setFriends, setPosts, setPost } =
   authSlice.actions;
 export default authSlice.reducer;
+export const selectCurrentTokent = (state: IState) => state.token;
