@@ -76,7 +76,7 @@ export const login = async (req: Request, resp: Response) => {
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) return resp.status(409).json({ messge: "Invalid credentials. " });
 
-  const accessToken = jwt.sign(
+  const token = jwt.sign(
     { id: user._id },
     process.env.ACCESS_TOKEN_SECRET as Secret,
     {
@@ -84,7 +84,7 @@ export const login = async (req: Request, resp: Response) => {
       algorithm: "HS256"
     }
   );
-
+  
   const refreshToken = jwt.sign(
     { id: user._id },
     process.env.REFRESH_TOKEN_SECRET as Secret,
@@ -99,9 +99,9 @@ export const login = async (req: Request, resp: Response) => {
     secure: true,
     sameSite: "none",
     maxAge: 1 * 24 * 60 * 60 * 1000
-  })
+  });
 
-  resp.status(200).json({ accessToken, user });
+  resp.status(200).json({ token, user });
 };
 
 /**
