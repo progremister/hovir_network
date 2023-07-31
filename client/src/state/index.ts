@@ -17,9 +17,9 @@ export const authSlice = createSlice({
       state.mode = state.mode === "light" ? "dark" : "light";
     },
     setLogin: (state, action) => {
-      const { user, accessToken } = action.payload;
+      const { user, token } = action.payload;
       state.user = user;
-      state.token = accessToken;
+      state.token = token;
     },
     setLogout: (state) => {
       state.user = null;
@@ -38,7 +38,7 @@ export const authSlice = createSlice({
       state.posts = posts;
     },
     setPost: (state, action) => {
-      const updatedPosts = state.posts.map((post) => {
+      const updatedPosts = state.posts.map((post: IPost) => {
         if (post._id === action.payload.post._id) return action.payload.post;
         return post;
       });
@@ -50,4 +50,3 @@ export const authSlice = createSlice({
 export const { setMode, setLogin, setLogout, setFriends, setPosts, setPost } =
   authSlice.actions;
 export default authSlice.reducer;
-export const selectCurrentTokent = (state: IState) => state.token;

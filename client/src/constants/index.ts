@@ -7,11 +7,11 @@ export interface IUser {
   username: string;
   email: string;
   password: string;
-  picturePath?: string;
-  friends: [];
+  picturePath: string;
+  friends: IUser[];
   location: string;
   occupation: string;
-  followers: number;
+  followers: IUser[];
   impressions: number;
 }
 

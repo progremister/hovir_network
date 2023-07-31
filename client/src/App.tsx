@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { CssBaseline, PaletteMode } from '@mui/material';
+import { CssBaseline } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 import HomePage from './scenes/homePage/HomePage';
