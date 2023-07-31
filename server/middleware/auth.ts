@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import jwt, { JwtPayload, Secret, VerifyErrors } from "jsonwebtoken";
 
-export interface IRequest extends Request {
+interface IRequest extends Request {
   user: string | JwtPayload;
 }
 
@@ -14,7 +14,7 @@ const verifyToken = (req: IRequest, resp: Response, next: NextFunction) => {
 
   const token = authHeader.toString().split(" ")[1];
 
-  const verified = jwt.verify(
+  jwt.verify(
     token,
     process.env.ACCESS_TOKEN_SECRET as Secret,
     async (err: VerifyErrors | null, decoded: any ) => {
