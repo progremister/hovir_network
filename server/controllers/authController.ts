@@ -80,7 +80,7 @@ export const login = async (req: Request, resp: Response) => {
     { id: user._id },
     process.env.ACCESS_TOKEN_SECRET as Secret,
     {
-      expiresIn: "10m",
+      expiresIn: "1h",
       algorithm: "HS256"
     }
   );
