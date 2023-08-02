@@ -11,7 +11,7 @@ export interface IUserSchema {
   picturePath?: string;
   location: string;
   occupation: string;
-  friends: any;
+  follows: any;
   followers: any;
 }
 
@@ -51,7 +51,7 @@ const UserSchema = new mongoose.Schema<IUserSchema>(
       type: String,
       default: "",
     },
-    friends: {
+    follows: {
       type: Array,
       default: [],
     },

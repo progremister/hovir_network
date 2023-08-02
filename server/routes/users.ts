@@ -1,5 +1,5 @@
-import express, { Request, Response } from 'express';
-import { getUser, getUserFriends, manageFriend } from "../controllers/usersController";
+import express from 'express';
+import { getUser, getUserFollows, manageFollow } from "../controllers/usersController";
 import verifyJWTMiddleware from "../middleware/auth";
 
 const router = express.Router();
@@ -7,9 +7,9 @@ const router = express.Router();
 router.use(verifyJWTMiddleware);
 
 router.get("/:id", getUser);
-router.get("/:id/friends", getUserFriends);
+router.get("/:id/followers", getUserFollows);
 
-router.patch("/:id/friendId", manageFriend);
+router.patch("/:id/followerId", manageFollow);
 
 export default router;
 
