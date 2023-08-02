@@ -16,62 +16,62 @@ export const getUser = async (req: Request, resp: Response) => {
 };
 
 /**
- * @desc Get User follows
- * @route GET /:id/follows
+ * @desc Get User connects
+ * @route GET /:id/connects
  * @access Private
  */
-export const getUserFollows = async (req: Request, resp: Response) => {
+export const getUserConnects = async (req: Request, resp: Response) => {
   const { id } = req.params;
   const user = await User.findById(id);
   if (!user) {
     return resp.status(404).json({ message: "User not found!" });
   }
 
-  const follows: IUserSchema[] = await Promise.all(
-    user.follows.map((id: string) => User.findById(id))
+  const connects: IUserSchema[] = await Promise.all(
+    user.connects.map((id: string) => User.findById(id))
   );
 
-  const formattedFollows = follows.map(
-    ({ _id, firstName, lastName, username, occupation, location, picturePath, follows }) => {
-      return { _id, firstName, lastName, username, occupation, location, picturePath, follows };
+  const formattedConnects = connects.map(
+    ({ _id, firstName, lastName, username, occupation, location, picturePath, connects }) => {
+      return { _id, firstName, lastName, username, occupation, location, picturePath, connects };
     }
   );
-  resp.status(200).json(formattedFollows);
+  resp.status(200).json(formattedConnects);
 };
 
 /**
- * @desc Add/Remove follow
- * @route PATCH /:id/followId
+ * @desc Add/Remove connect
+ * @route PATCH /:id/connectId
  * @access Private
  */
-export const manageFollow = async (req: Request, resp: Response) => {
-  const { id, followId } = req.params;
+export const manageConnect = async (req: Request, resp: Response) => {
+  const { id, connectId } = req.params;
   const user = await User.findById(id);
-  const follow = await User.findById(followId);
-  if (!user || !follow) {
+  const connect = await User.findById(connectId);
+  if (!user || !connect) {
     return resp.status(404).json({ message: "User not found!" });
   }
 
-  if (user.follows.includes(follow)) {
-    user.follows = user.follows.filter((id: string) => id !== followId);
-    follow.follows = follow.follows.filter((id: string) => id !== id);
+  if (user.connects.includes(connect)) {
+    user.connects = user.connects.filter((id: string) => id !== connectId);
+    connect.connects = connect.connects.filter((id: string) => id !== id);
   } else {
-    user.follows.push(followId);
-    follow.follows.push(id);
+    user.connects.push(connectId);
+    connect.connects.push(id);
   }
 
   await user.save();
-  await follow.save();
+  await connect.save();
 
-  const follows: IUserSchema[] = await Promise.all(
-    user.follows.map((id: string) => User.findById(id))
+  const connects: IUserSchema[] = await Promise.all(
+    user.connects.map((id: string) => User.findById(id))
   );
 
-  const formattedFollows = follows.map(
-    ({ _id, firstName, lastName, username, occupation, location, picturePath, follows }) => {
-      return { _id, firstName, lastName, username, occupation, location, picturePath, follows };
+  const formattedconnects = connects.map(
+    ({ _id, firstName, lastName, username, occupation, location, picturePath, connects }) => {
+      return { _id, firstName, lastName, username, occupation, location, picturePath, connects };
     }
   );
 
-  resp.status(200).json(formattedFollows);
+  resp.status(200).json(formattedconnects);
 };

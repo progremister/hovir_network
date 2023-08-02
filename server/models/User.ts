@@ -11,8 +11,7 @@ export interface IUserSchema {
   picturePath?: string;
   location: string;
   occupation: string;
-  follows: any;
-  followers: any;
+  connects: any;
 }
 
 const UserSchema = new mongoose.Schema<IUserSchema>(
@@ -51,13 +50,9 @@ const UserSchema = new mongoose.Schema<IUserSchema>(
       type: String,
       default: "",
     },
-    follows: {
-      type: Array,
-      default: [],
-    },
     location: String,
     occupation: String,
-    followers: {
+    connects: {
       type: Array,
       default: [],
     }
