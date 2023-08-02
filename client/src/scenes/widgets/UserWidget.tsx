@@ -47,7 +47,7 @@ const UserWidget = ({ userId, picturePath }: UserWidgetProps) => {
     lastName,
     location,
     occupation,
-    followers
+    connects
   } = user;
 
   return (
@@ -73,7 +73,7 @@ const UserWidget = ({ userId, picturePath }: UserWidgetProps) => {
             >
               {firstName} {lastName}
             </Typography>
-            <Typography color={medium}>{followers.length} followers</Typography>
+            <Typography color={medium}>{connects.length} connects</Typography>
           </Box>
         </FlexBetween>
         <ManageAccountsOutlined

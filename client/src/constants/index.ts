@@ -8,10 +8,9 @@ export interface IUser {
   email: string;
   password: string;
   picturePath: string;
-  friends: IUser[];
   location: string;
   occupation: string;
-  followers: IUser[];
+  connects: IUser[];
   impressions: number;
 }
 

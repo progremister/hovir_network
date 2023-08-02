@@ -25,12 +25,12 @@ export const authSlice = createSlice({
       state.user = null;
       state.token = null;
     },
-    setFriends: (state, action) => {
+    setConnects: (state, action) => {
       if (state.user) {
-        const { friends } = action.payload;
-        state.user.friends = friends;
+        const { connects } = action.payload;
+        state.user.connects = connects;
       } else {
-        console.error("User frinds list is empty :(");
+        console.error("User connects list is empty :(");
       }
     },
     setPosts: (state, action) => {
@@ -47,6 +47,6 @@ export const authSlice = createSlice({
   },
 });
 
-export const { setMode, setLogin, setLogout, setFriends, setPosts, setPost } =
+export const { setMode, setLogin, setLogout, setConnects, setPosts, setPost } =
   authSlice.actions;
 export default authSlice.reducer;
