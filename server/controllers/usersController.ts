@@ -52,7 +52,7 @@ export const manageConnect = async (req: Request, resp: Response) => {
     return resp.status(404).json({ message: "User not found!" });
   }
 
-  if (user.connects.includes(connect)) {
+  if (user.connects.includes(connectId)) {
     user.connects = user.connects.filter((id: string) => id !== connectId);
     connect.connects = connect.connects.filter((id: string) => id !== id);
   } else {

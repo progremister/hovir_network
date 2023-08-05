@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import { Request, Response } from "express";
 import Post from "../models/Post";
 import User from "../models/User";
 
@@ -12,10 +12,11 @@ export const createPost = async (req: Request, resp: Response) => {
     userId,
     username: user.username,
     location: user.location,
+    description,
     userPicturePath: user.picturePath,
     picturePath,
     likes: {},
-    comments: {},
+    comments: [],
   });
   await newPost.save();
 

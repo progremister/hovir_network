@@ -13,9 +13,9 @@ import errorHandler from "./middleware/errorHandler";
 import connectDB from "./config/dbConnection";
 import corsOptions from "./config/corsOptions";
 import authRoutes from "./routes/auth";
-import usersRoutes from "./routes/users"
+import usersRoutes from "./routes/users";
 import postsRoutes from "./routes/posts";
-import 'express-async-errors';
+import "express-async-errors";
 
 /* CONFIGURATIONS */
 dotenv.config();

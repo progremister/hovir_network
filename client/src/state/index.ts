@@ -5,7 +5,7 @@ import { IUser, IPost, IState } from "../constants";
 const initialState: IState = {
   mode: "light",
   user: null as IUser | null,
-  token: null,
+  token: null as string | null,
   posts: [] as IPost[],
 };
 
@@ -27,15 +27,13 @@ export const authSlice = createSlice({
     },
     setConnects: (state, action) => {
       if (state.user) {
-        const { connects } = action.payload;
-        state.user.connects = connects;
+        state.user.connects = action.payload.connects;
       } else {
         console.error("User connects list is empty :(");
       }
     },
     setPosts: (state, action) => {
-      const { posts } = action.payload;
-      state.posts = posts;
+      state.posts = action.payload.posts;
     },
     setPost: (state, action) => {
       const updatedPosts = state.posts.map((post: IPost) => {

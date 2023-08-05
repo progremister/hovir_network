@@ -29,7 +29,7 @@ export interface IPost {
 export interface IState {
   mode: PaletteMode;
   user: IUser | null;
-  token: any;
+  token: string | null;
   posts: IPost[];
 }
 

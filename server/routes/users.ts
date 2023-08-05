@@ -9,7 +9,7 @@ router.use(verifyJWTMiddleware);
 router.get("/:id", getUser);
 router.get("/:id/connects", getUserConnects);
 
-router.patch("/:id/connectId", manageConnect);
+router.patch("/:id/:connectId", manageConnect);
 
 export default router;
 
