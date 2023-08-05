@@ -63,7 +63,7 @@ const NewPostWidget = ({ picturePath }: NewPostWidgetProps) => {
   };
 
   return (
-    <WidgetWrapper>
+    <WidgetWrapper mb="2rem" sx={{ mb: "1.5rem"}}>
       <FlexBetween gap="1.5rem">
         <UserImage image={picturePath} size="50px" />
         <InputBase
