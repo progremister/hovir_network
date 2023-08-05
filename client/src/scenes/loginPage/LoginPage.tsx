@@ -5,7 +5,7 @@ import Form from './Form'
 
 const LoginPage = () => {
   const theme = useTheme();
-  const isNonMobileScreens = useMediaQuery("(max-width: 815px)");
+  const isNonMobileScreens = useMediaQuery("(min-width: 760px)");
 
   const alt = theme.palette.background.alt;
 
@@ -21,12 +21,12 @@ const LoginPage = () => {
       <img 
         src={ theme.palette.mode === "light" ? logoLight : logoDark } 
         alt="logo" 
-        width="20%" 
+        width={isNonMobileScreens ? "20%" : "50%"}
         style={{ marginTop: "3.5rem" }} />
 
       </Box>
       <Box
-        width={isNonMobileScreens ? "50%" : "93%"}
+        width={isNonMobileScreens ? "70%" : "93%"}
         p="2rem"
         m="2rem auto"
         borderRadius="1.5rem"
