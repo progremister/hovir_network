@@ -7,10 +7,13 @@ import UserWidget from "../widgets/UserWidget";
 import NewPostWidget from "../widgets/NewPostWidget";
 import PostsWidget from "../widgets/PostsWidget";
 import AdvertWidget from "../widgets/AdvertWidget";
+import ConnectsListWidget from "../widgets/ConnectsListWidget";
 
 const HomePage = () => {
   const isNonMobileScreens = useMediaQuery("(min-width: 850px)");
-  const { _id, picturePath } = useSelector((state: IState) => state.user!);
+  const { _id, picturePath, connects } = useSelector(
+    (state: IState) => state.user!
+  );
 
   return (
     <Box>
@@ -35,7 +38,12 @@ const HomePage = () => {
         {isNonMobileScreens && (
           <Box flexBasis="26%">
             <AdvertWidget />
-            <Box m="2rem 0" />
+            {connects.length > 0 && (
+              <>
+                <Box m="2rem 0" />
+                <ConnectsListWidget userId={_id} />
+              </>
+            )}
           </Box>
         )}
       </Box>
