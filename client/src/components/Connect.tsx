@@ -15,7 +15,12 @@ type ConnectProps = {
   userPicturePath: string;
 };
 
-const Connect = ({ connectId, username, subtitle, userPicturePath }: ConnectProps) => {
+const Connect = ({
+  connectId,
+  username,
+  subtitle,
+  userPicturePath,
+}: ConnectProps) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { _id } = useSelector((state: IState) => state.user!);
@@ -38,56 +43,58 @@ const Connect = ({ connectId, username, subtitle, userPicturePath }: ConnectProp
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
-        }
+        },
       }
     );
 
     const data = await response.json();
-    dispatch(setConnects({ connects: data}));
+    dispatch(setConnects({ connects: data }));
     console.log(isConnected);
   };
 
   return (
     <FlexBetween>
-        <FlexBetween gap="1rem">
-            <UserImage image={userPicturePath} size="50px" />
-            <Box
-                onClick={() => {
-                    navigate(`/profile/${connectId}`);
-                    navigate(0); //TODO: fix in future
-                }}
-            >
-                <Typography
-                    color={main}
-                    variant="h5"
-                    fontWeight="500"
-                    sx={{
-                        "&:hover": {
-                            color: palette.primary.light,
-                            cursor: "pointer"
-                        }
-                    }}
-                >
-                    {username}
-                </Typography>
-                <Typography color={medium} fontSize="0.75rem">
-                    {subtitle}
-                </Typography>
-            </Box>
-        </FlexBetween>
-        <IconButton 
-        onClick={() => patchConnect()}
-        sx={{ 
-            backgroundColor: primaryLight, 
-            p: "0.6rem"
-        }}
+      <FlexBetween gap="1rem">
+        <UserImage image={userPicturePath} size="50px" />
+        <Box
+          onClick={() => {
+            navigate(`/profile/${connectId}`);
+            navigate(0); //TODO: fix in future
+          }}
         >
-            {isConnected ? (
-                <PersonRemoveOutlined sx={{ color: primaryDark }} />
-            ) : (
-                <PersonAddOutlined sx={{ color: primaryDark }} />
-            )}
+          <Typography
+            color={main}
+            variant="h5"
+            fontWeight="500"
+            sx={{
+              "&:hover": {
+                color: palette.primary.light,
+                cursor: "pointer",
+              },
+            }}
+          >
+            {username}
+          </Typography>
+          <Typography color={medium} fontSize="0.75rem">
+            {subtitle}
+          </Typography>
+        </Box>
+      </FlexBetween>
+      {connectId !== _id && (
+        <IconButton
+          onClick={() => patchConnect()}
+          sx={{
+            backgroundColor: primaryLight,
+            p: "0.6rem",
+          }}
+        >
+          {isConnected ? (
+            <PersonRemoveOutlined sx={{ color: primaryDark }} />
+          ) : (
+            <PersonAddOutlined sx={{ color: primaryDark }} />
+          )}
         </IconButton>
+      )}
     </FlexBetween>
   );
 };
