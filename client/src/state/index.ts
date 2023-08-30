@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { IUser, IPost, IState } from "../constants";
+import { IPost, IState } from "../constants";
 
 const initialState: IState = {
   mode: "light",
-  user: null as IUser | null,
-  token: null as string | null,
-  posts: [] as IPost[],
+  user: null,
+  token: null,
+  posts: [],
 };
 
 export const authSlice = createSlice({

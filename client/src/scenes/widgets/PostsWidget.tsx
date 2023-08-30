@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { setPosts } from "../../state";
 import PostWidget from "./PostWidget";
-import { IState } from "../../constants";
+import { IPost, IState } from "../../constants";
 
 type PostsWidgetProps = { userId: string; isProfile?: boolean };
 
@@ -17,7 +17,7 @@ const PostsWidget = ({ userId, isProfile = false }: PostsWidgetProps) => {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });
-    const data = await response.json();
+    const data: IPost = await response.json();
     dispatch(setPosts({ posts: data }));
   };
   

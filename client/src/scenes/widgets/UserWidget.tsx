@@ -12,11 +12,11 @@ import { useNavigate } from "react-router-dom";
 import UserImage from "../../components/UserImage";
 import FlexBetween from "../../components/FlexBetween";
 import WidgetWrapper from "../../components/WidgetWrapper";
-import { IState } from "../../constants";
+import { IState, IUser } from "../../constants";
 
 type UserWidgetProps = { userId: string; picturePath: string };
 const UserWidget = ({ userId, picturePath }: UserWidgetProps) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<IUser | null>(null);
   const theme = useTheme();
   const navigate = useNavigate();
   const token = useSelector((state: IState) => state.token);
@@ -30,7 +30,7 @@ const UserWidget = ({ userId, picturePath }: UserWidgetProps) => {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });
-    const data = await response.json();
+    const data: IUser = await response.json();
     setUser(data);
   };
 

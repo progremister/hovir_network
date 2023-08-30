@@ -11,16 +11,27 @@ import {
   useTheme,
 } from "@mui/material";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import { Formik } from "formik";
+import { Formik, FormikErrors, FormikHelpers, FormikState, FormikTouched } from "formik";
 import * as yup from "yup";
 
 import { setLogin } from "../../state";
 import FlexBetween from "../../components/FlexBetween";
 
-const loginSchema = yup.object().shape({
-  email: yup.string().required("required"),
-  password: yup.string().required("required"),
-});
+interface LoginValues {
+  email: string;
+  password: string;
+}
+
+interface RegisterValues {
+  firstName: string;
+  lastName: string;
+  username: string;
+  email: string;
+  password: string;
+  location: string;
+  occupation: string;
+  picture: string;
+}
 
 const registerSchema = yup.object().shape({
   firstName: yup.string().required("required"),
@@ -39,10 +50,10 @@ const registerSchema = yup.object().shape({
   picture: yup.string(),
 });
 
-const initialValuesLogin = {
-  email: "",
-  password: "",
-};
+const loginSchema = yup.object().shape({
+  email: yup.string().required("required"),
+  password: yup.string().required("required"),
+});
 
 const initialValuesRegister = {
   firstName: "",
@@ -55,6 +66,11 @@ const initialValuesRegister = {
   picture: "",
 };
 
+const initialValuesLogin = {
+  email: "",
+  password: "",
+};
+
 const Form = () => {
   const [pageType, setPageType] = useState("login");
   const { palette } = useTheme();
@@ -64,12 +80,15 @@ const Form = () => {
   const isLogin = pageType === "login";
   const isRegister = pageType === "register";
 
-  const register = async (values, onSubmitProps) => {
+  const register = async (
+    values: RegisterValues,
+    onSubmitProps: FormikHelpers<RegisterValues>
+  ) => {
     const formData = new FormData();
     for (let value in values) {
-      formData.append(value, values[value]);
+      formData.append(value, values[value as keyof RegisterValues]);
     }
-    formData.append("picturePath", values.picture.name);
+    formData.append("picturePath", values.picture);
 
     const savedUserResponse = await fetch(
       "http://localhost:3030/auth/register",
@@ -86,35 +105,52 @@ const Form = () => {
     }
   };
 
-  const login = async (values, onSubmitProps) => {
-    const loggedInUserResponse = await fetch("http://localhost:3030/auth/login", {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(values),
-    });
+  const login = async (
+    values: LoginValues,
+    onSubmitProps: FormikHelpers<LoginValues>
+  ) => {
+    const loggedInUserResponse = await fetch(
+      "http://localhost:3030/auth/login",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      }
+    );
     const loggedIn = await loggedInUserResponse.json();
     onSubmitProps.resetForm();
-    if (loggedIn) {      
+    if (loggedIn) {
       dispatch(
         setLogin({
           user: loggedIn.user,
-          token: loggedIn.token
+          token: loggedIn.token,
         })
       );
       navigate("/home");
     }
   };
 
-  const handleFormSubmit = async (values, onSubmitProps) => {
-    if (isLogin) await login(values, onSubmitProps);
-    if (isRegister) await register(values, onSubmitProps);
+  const handleFormSubmit = async (
+    values: LoginValues | RegisterValues,
+    onSubmitProps: FormikHelpers<LoginValues | RegisterValues>
+  ) => {
+    if (isLogin)
+      await login(
+        values as LoginValues,
+        onSubmitProps as FormikHelpers<LoginValues>
+      );
+    if (isRegister)
+      await register(
+        values as RegisterValues,
+        onSubmitProps as FormikHelpers<RegisterValues>
+      );
   };
 
   return (
     <Formik
       onSubmit={handleFormSubmit}
-      initialValues={isLogin ? initialValuesLogin : initialValuesRegister}
-      validationSchema={isLogin ? loginSchema : registerSchema}
+      initialValues={isRegister ? initialValuesRegister : initialValuesLogin}
+      validationSchema={isRegister ? registerSchema : loginSchema}
     >
       {({
         values,
@@ -218,7 +254,9 @@ const Form = () => {
                           <p>Add Picture Here</p>
                         ) : (
                           <FlexBetween overflow="hidden">
-                            <Typography maxWidth="100%">{values.picture.name}</Typography>
+                            <Typography maxWidth="100%">
+                              {values.picture.name}
+                            </Typography>
                             <EditOutlinedIcon />
                           </FlexBetween>
                         )}

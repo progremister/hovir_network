@@ -29,10 +29,12 @@ import { IState } from "../../constants";
 
 type NewPostWidgetProps = { picturePath: string };
 
+type Image = { name: string };
+
 const NewPostWidget = ({ picturePath }: NewPostWidgetProps) => {
   const dispatch = useDispatch();
   const [isImage, setIsImage] = useState(false);
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState<Image | null>(null);
   const [post, setPost] = useState("");
   const { palette } = useTheme();
   const { _id } = useSelector((state: IState) => state.user!);
@@ -47,7 +49,7 @@ const NewPostWidget = ({ picturePath }: NewPostWidgetProps) => {
     formData.append("description", post);
     if (image) {
       formData.append("picture", image);
-      formData.append("picturePath", image.name);
+      formData.append("picturePath", image);
     }
 
     const response = await fetch(`http://localhost:3030/posts`, {
@@ -63,7 +65,7 @@ const NewPostWidget = ({ picturePath }: NewPostWidgetProps) => {
   };
 
   return (
-    <WidgetWrapper mb="2rem" sx={{ mb: "1.5rem"}}>
+    <WidgetWrapper mb="2rem" sx={{ mb: "1.5rem" }}>
       <FlexBetween gap="1.5rem">
         <UserImage image={picturePath} size="50px" />
         <InputBase

@@ -6,7 +6,7 @@ import { setConnects } from "../state";
 import FlexBetween from "./FlexBetween";
 import UserImage from "./UserImage";
 import { useNavigate } from "react-router-dom";
-import { IState } from "../constants";
+import { IState, IUser } from "../constants";
 
 type ConnectProps = {
   connectId: string;
@@ -47,7 +47,7 @@ const Connect = ({
       }
     );
 
-    const data = await response.json();
+    const data: IUser = await response.json();
     dispatch(setConnects({ connects: data }));
     console.log(isConnected);
   };

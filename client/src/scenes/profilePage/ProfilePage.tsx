@@ -6,10 +6,10 @@ import Navbar from "../../components/Navbar";
 import UserWidget from "../widgets/UserWidget";
 import PostsWidget from "../widgets/PostsWidget";
 import ConnectsListWidget from "../widgets/ConnectsListWidget";
-import { IState } from "../../constants";
+import { IState, IUser } from "../../constants";
 
 const ProfilePage = () => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<IUser | null>(null);
   const { userId } = useParams();
   const token = useSelector((state: IState) => state.token);
   const isNonMobileScreens = useMediaQuery("(min-width:800px)");
@@ -20,7 +20,7 @@ const ProfilePage = () => {
       headers: { Authorization: `Bearer ${token}` },
     });
 
-    const data = await response.json();
+    const data: IUser = await response.json();
     setUser(data);
   };
 
@@ -41,12 +41,12 @@ const ProfilePage = () => {
         justifyContent="center"
       >
         <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
-          <UserWidget userId={userId} picturePath={user.picturePath} />
+          <UserWidget userId={userId!} picturePath={user.picturePath} />
           <Box>
             {user.connects.length > 0 && (
               <>
                 <Box m="2rem 0" />
-                <ConnectsListWidget userId={userId} />
+                <ConnectsListWidget userId={userId!} />
               </>
             )}
           </Box>
@@ -55,7 +55,7 @@ const ProfilePage = () => {
           flexBasis={isNonMobileScreens ? "42%" : undefined}
           mt={isNonMobileScreens ? undefined : "2rem"}
         >
-          <PostsWidget userId={userId} isProfile />
+          <PostsWidget userId={userId!} isProfile />
         </Box>
       </Box>
     </Box>

@@ -14,7 +14,7 @@ import WidgetWrapper from "../../components/WidgetWrapper";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setPost } from "../../state";
-import { IState } from "../../constants";
+import { IPost, IState } from "../../constants";
 
 type PostWidgetProps = {
   postId: string;
@@ -60,7 +60,7 @@ const PostWidget = ({
       body: JSON.stringify({ userId: loggedInUserId }),
     });
 
-    const updatedPost = await response.json();
+    const updatedPost: IPost = await response.json();
     dispatch(setPost({ post: updatedPost }));
   };
 

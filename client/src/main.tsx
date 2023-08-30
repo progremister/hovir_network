@@ -10,12 +10,10 @@ import { store } from "./app/store";
 const rootElement = document.getElementById("root");
 
 ReactDOM.render(
-  <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistStore(store)}>
         <App />
       </PersistGate>
-    </Provider>
-  </React.StrictMode>,
+    </Provider>,
   rootElement
 );

@@ -76,11 +76,11 @@ const Navbar = () => {
             )}
           </IconButton>
           <Message sx={{ fontSize: "25px" }} />
-          <Notifications sx={{ fontSize: "25px" }} />
-          <Help sx={{ fontSize: "25px" }} />
+          {/* <Notifications sx={{ fontSize: "25px" }} />
+          <Help sx={{ fontSize: "25px" }} /> */}
           <FormControl variant="standard">
             <Select
-              value={username}
+              value={user!.username}
               sx={{
                 backgroundColor: neutralLight,
                 width: "150px",
@@ -97,7 +97,7 @@ const Navbar = () => {
               input={<InputBase />}
             >
               <MenuItem>
-                <Typography>{username}</Typography>
+                <Typography>{user!.username}</Typography>
               </MenuItem>
               <MenuItem
                 onClick={() => {
@@ -158,8 +158,8 @@ const Navbar = () => {
               )}
             </IconButton>
             <Message sx={{ fontSize: "25px" }} />
-            <Notifications sx={{ fontSize: "25px" }} />
-            <Help sx={{ fontSize: "25px" }} />
+            {/* <Notifications sx={{ fontSize: "25px" }} />
+            <Help sx={{ fontSize: "25px" }} /> */}
             <FormControl variant="standard">
               <Select
                 value={username}
