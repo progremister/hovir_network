@@ -37,7 +37,7 @@ const Connect = ({
 
   const patchConnect = async () => {
     const response = await fetch(
-      `http://localhost:3030/users/${_id}/${connectId}`,
+      `https://hovir-server.vercel.app/users/${_id}/${connectId}`,
       {
         method: "PATCH",
         headers: {

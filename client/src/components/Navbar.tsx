@@ -10,6 +10,7 @@ import {
   FormControl,
   useTheme,
   useMediaQuery,
+  TypeBackground,
 } from "@mui/material";
 import {
   Search,
@@ -36,7 +37,7 @@ const Navbar = () => {
   const isNonMobileScreens = useMediaQuery("(min-width: 815px)");
 
   const theme = useTheme();
-  const neutralLight = theme.palette.neutral.light;
+  const neutralLightlette = theme.palette.neutral.light;
   const dark = theme.palette.neutral.dark;
   const alt = theme.palette.background.alt;
 

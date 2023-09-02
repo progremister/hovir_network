@@ -26,7 +26,7 @@ const UserWidget = ({ userId, picturePath }: UserWidgetProps) => {
   const main = theme.palette.neutral.main;
 
   const getUser = async () => {
-    const response = await fetch(`http://localhost:3030/users/${userId}`, {
+    const response = await fetch(`https://hovir-server.vercel.app/users/${userId}`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });

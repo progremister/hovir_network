@@ -13,7 +13,7 @@ const PostsWidget = ({ userId, isProfile = false }: PostsWidgetProps) => {
   const token = useSelector((state: IState) => state.token);
 
   const getPosts = async () => {
-    const response = await fetch("http://localhost:3030/posts", {
+    const response = await fetch("https://hovir-server.vercel.app/posts", {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -23,7 +23,7 @@ const PostsWidget = ({ userId, isProfile = false }: PostsWidgetProps) => {
   
   const getUserPosts = async () => {
     const response = await fetch(
-      `http://localhost:3030/posts/${userId}`,
+      `https://hovir-server.vercel.app/posts/${userId}`,
       {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },

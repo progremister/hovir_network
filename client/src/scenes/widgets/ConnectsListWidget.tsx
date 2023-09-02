@@ -17,7 +17,7 @@ const ConnectsListWidget = ({ userId }: ConnectsListProps) => {
 
   const getFriends = async () => {
     const response = await fetch(
-      `http://localpost:3030/users/${userId}/connects`,
+      `https://hovir-server.vercel.app/users/${userId}/connects`,
       {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },

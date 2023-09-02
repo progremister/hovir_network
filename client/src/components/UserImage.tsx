@@ -9,7 +9,7 @@ const UserImage = ({ image, size = "60px" }: UserImageProps) => {
         style={{ objectFit: "cover", borderRadius: "50%" }}
         width={size}
         height={size}
-        src={`http://localhost:3030/assets/${image}`}
+        src={`https://hovir-server.vercel.app/assets/${image}`}
         alt="user"
       />
     </Box>

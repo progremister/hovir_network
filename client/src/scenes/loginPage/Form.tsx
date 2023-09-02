@@ -91,7 +91,7 @@ const Form = () => {
     formData.append("picturePath", values.picture);
 
     const savedUserResponse = await fetch(
-      "http://localhost:3030/auth/register",
+      "https://hovir-server.vercel.app/auth/register",
       {
         method: "POST",
         body: formData,
@@ -110,7 +110,7 @@ const Form = () => {
     onSubmitProps: FormikHelpers<LoginValues>
   ) => {
     const loggedInUserResponse = await fetch(
-      "http://localhost:3030/auth/login",
+      "https://hovir-server.vercel.app/auth/login",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

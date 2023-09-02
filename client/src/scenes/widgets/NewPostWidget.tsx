@@ -52,7 +52,7 @@ const NewPostWidget = ({ picturePath }: NewPostWidgetProps) => {
       formData.append("picturePath", image);
     }
 
-    const response = await fetch(`http://localhost:3030/posts`, {
+    const response = await fetch(`https://hovir-server.vercel.app/posts`, {
       method: "POST",
       headers: { Authorization: `Bearer ${token}` },
       body: formData,
