@@ -33,7 +33,7 @@ app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb" }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors({
-   origin: "https://hovir.netlify.app/"
+   origin: "https://hovir.vercel.app"
 }));
 
 // app.use(function (req, res, next) {
