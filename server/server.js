@@ -22,9 +22,10 @@ dotenv.config();
 const app = express();
 
 app.use(cors({
-  origin: "https://hovir.vercel.app/",
-  methods: ["POST", "GET", "OPTION", "PUT"],
-  credentials: true
+  origin: "https://hovir.vercel.app",
+  methods: ["POST", "GET", "OPTIONS", "PUT"],
+  credentials: true,
+  optionsSuccessStatus: 200,
 }));
 
 app.use(logger);
