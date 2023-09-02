@@ -56,16 +56,16 @@ app.use("/auth", authRoutes);
 app.use("/users", usersRoutes);
 app.use("/posts", postsRoutes);
 
-app.all("*", (req, resp) => {
-  resp.status(404);
-  if (req.accepts("html")) {
-    resp.sendFile(path.join(__dirname, "views", "404.html"));
-  } else if (req.accepts("json")) {
-    resp.json({ message: "404 Not Found!" });
-  } else {
-    resp.type("txt").send("404 Not Found!");
-  }
-});
+// app.all("*", (req, resp) => {
+//   resp.status(404);
+//   if (req.accepts("html")) {
+//     resp.sendFile(path.join(__dirname, "views", "404.html"));
+//   } else if (req.accepts("json")) {
+//     resp.json({ message: "404 Not Found!" });
+//   } else {
+//     resp.type("txt").send("404 Not Found!");
+//   }
+// });
 
 /* MONGOOSE */
 connectDB();
