@@ -32,14 +32,8 @@ app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb" }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-app.use(cors());
+app.use(cors(corsOptions));
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
-
-
-app.use((req: Request, resp: Response, next) => {
-  resp.header('Access-Control-Allow-Origin', 'https://hovir.netlify.app');
-  next();
-});
 
 /* ROUTES */
 app.use("/auth", authRoutes);
