@@ -71,10 +71,13 @@ app.use("/posts", postsRoutes);
 connectDB();
 
 const PORT = process.env.PORT || 3333;
+app.listen(PORT, () => console.log("Hóvir Server"));
 mongoose.connection.once("open", () => {
   console.log("Connected to MongoDB");
   app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
 });
+
+
 
 // interface CustomError extends Error {
 //   no?: number;
