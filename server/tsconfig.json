@@ -12,6 +12,6 @@
   },
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "Recommended",
-  "include": ["*.ts"],
+  "include": ["*.ts", "server.js"],
   "exclude": ["node_modules", "**/*.spec.ts"]
 }  
