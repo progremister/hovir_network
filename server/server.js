@@ -21,13 +21,11 @@ import "express-async-errors";
 dotenv.config();
 const app = express();
 
-app.use(cors(
-//   {
-//   origin: "https://hovir.netlify.app",
-//   methods: ["POST", "GET", "OPTION", "PUT"],
-//   credentials: true
-// }
-));
+app.use(cors({
+  origin: "https://hovir.vercel.app/",
+  methods: ["POST", "GET", "OPTION", "PUT"],
+  credentials: true
+}));
 
 app.use(logger);
 app.use(errorHandler);
