@@ -32,7 +32,7 @@ app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb" }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-//app.use(cors(corsOptions));
+app.use(cors());
 
 app.use(function (req, res, next) {
    res.header("Access-Control-Allow-Origin", "*");
