@@ -28,6 +28,15 @@ app.use(cors({
   optionsSuccessStatus: 200,
 }));
 
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "https://hovir.vercel.app");
+  res.header("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT");
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.header("Access-Control-Options-Success", "true");
+  console.log("CORS headers set:", res.getHeaders());
+  next();
+});
+
 app.use(logger);
 app.use(errorHandler);
 
